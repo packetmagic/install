@@ -53,6 +53,8 @@ images:
     newTag: 2.0.1
 namespace: awx
 
+kubectl config set-context --current --namespace=awx
+
 kubectl apply -k .
 
 kubectl port-forward service/awx-server-service --address 0.0.0.0 30080:80
