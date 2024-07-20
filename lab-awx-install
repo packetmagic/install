@@ -43,6 +43,16 @@ metadata:
 spec:
   service_type: nodeport
 
+kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - github.com/ansible/awx-operator/config/default?ref=2.0.1
+images:
+  - name: quay.io/ansible/awx-operator
+    newTag: 2.0.1
+namespace: awx
+
 kubectl apply -k .
 
 kubectl port-forward service/awx-server-service --address 0.0.0.0 30080:80
