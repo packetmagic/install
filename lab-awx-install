@@ -24,3 +24,26 @@ newgrp docker
 docker run hello-world
 
 sudo snap install kubectl --classic
+
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+minikube start
+
+git clone https://github.com/ansible/awx-operator.git
+cd awx-operator
+export NAMESPACE=awx
+make deploy
+
+awx-server.yaml
+apiVersion: awx.ansible.com/v1beta1
+kind: AWX
+metadata:
+  name: awx-server
+spec:
+  service_type: nodeport
+
+kubectl apply -k .
+
+kubectl port-forward service/awx-server-service --address 0.0.0.0 30080:80
+
