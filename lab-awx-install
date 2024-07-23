@@ -80,3 +80,5 @@ kubectl port-forward service/awx-server-service --address 0.0.0.0 30080:80
 
 
 kubectl get secret awx-admin-password -o jsonpath='{.data.password}' | base64 --decode
+
+kubectl exec pod/<awx_pod_name> --container awx-web -it awx-manage createsuperuser
