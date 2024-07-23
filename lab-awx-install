@@ -79,4 +79,4 @@ kubectl logs -f deployments/awx-operator-controller-manager -c awx-manager
 kubectl port-forward service/awx-server-service --address 0.0.0.0 30080:80
 
 
-
+kubectl get secret awx-admin-password -o jsonpath='{.data.password}' | base64 --decode
